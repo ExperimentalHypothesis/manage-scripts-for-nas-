@@ -3,7 +3,7 @@ from pathlib import Path
 
 from config import config
 from connection import ConnectionAdapter
-from src.fs_operations import titlecase_names_in_dir
+from src.fs_operations import titlecase_names_in_current_dir
 
 logging.basicConfig(level=logging.INFO)
 
@@ -12,7 +12,7 @@ logging.basicConfig(level=logging.INFO)
 def main():
     with ConnectionAdapter(user="test") as conn:
 
-        titlecase_names_in_dir(conn, "music")
+        titlecase_names_in_current_dir(conn, "music")
 
         pass
 

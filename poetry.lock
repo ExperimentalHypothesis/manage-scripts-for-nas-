@@ -60,6 +60,17 @@ files = [
 ]
 
 [[package]]
+name = "pyfakefs"
+version = "5.6.0"
+description = "pyfakefs implements a fake file system that mocks the Python file system modules."
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "pyfakefs-5.6.0-py3-none-any.whl", hash = "sha256:1a45bba8615323ec29d65929d32dc66d7b59a1e60a02109950440edb0486c539"},
+    {file = "pyfakefs-5.6.0.tar.gz", hash = "sha256:7a549b32865aa97d8ba6538285a93816941d9b7359be2954ac60ec36b277e879"},
+]
+
+[[package]]
 name = "pysmb"
 version = "1.2.9.1"
 description = "pysmb is an experimental SMB/CIFS library written in Python to support file sharing between Windows and Linux machines"
@@ -147,4 +158,4 @@ telegram = ["requests"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "b463b58c7c4901996372884b3aebaf09dde545fe941a435324079692235b1325"
+content-hash = "bead001f78ff4887931272fe0fb627238d9b3d9e7102fc2cc74b5dfcb8b6d0c4"
