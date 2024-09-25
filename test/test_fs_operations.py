@@ -22,24 +22,30 @@ def empty_fs(fs):
     fs.create_dir(os.path.join(FAKE_SHARED_FOLDER, FAKE_MUSIC_FOLDER, VARIOUS_ARTISTS))
 
 
-@pytest.fixture
-def non_empty_fs(empty_fs, fs):
-    artist_folder = os.path.join(FAKE_SHARED_FOLDER, FAKE_MUSIC_FOLDER, "edward-ka spell")
+def test_titlecase_names(empty_fs, fs):
+    # Arrange data
+    # - add one artist name to empty filesystem
+    artist_name = "edward-ka spell"
+    artist_folder = os.path.join(FAKE_SHARED_FOLDER, FAKE_MUSIC_FOLDER, artist_name)
     fs.create_dir(artist_folder)
 
-    album_folder = os.path.join(artist_folder, "china doll")
+    # - add one album
+    album_name = "china doll"
+    album_folder = os.path.join(artist_folder, album_name)
     fs.create_dir(album_folder)
 
-def test_titlecase_names(non_empty_fs, fs):
     music_folder = os.path.join(FAKE_SHARED_FOLDER, FAKE_MUSIC_FOLDER)
 
+    # Mock the call to listPath
     conn = Mock()
     conn.listPath.side_effect = lambda shared_folder, current_dir: [
-        create_autospec(SharedFile, instance=True) for _ in fs.listdir(current_dir)
+        Mock(filename=name, isDirectory=True) for name in fs.listdir(current_dir)
     ]
 
+    # Act
     titlecase_names_in_current_dir(conn, music_folder)
 
-
-
-
+    # Assert
+    artist_name_old = os.path.join(FAKE_SHARED_FOLDER, FAKE_MUSIC_FOLDER, artist_name)
+    artist_name_new = os.path.join(FAKE_SHARED_FOLDER, FAKE_MUSIC_FOLDER, artist_name.title().replace("-", " "))
+    conn.rename.assert_called_once_with(FAKE_SHARED_FOLDER, artist_name_old, artist_name_new)
