@@ -7,7 +7,7 @@ import string
 from smb.base import SharedFile
 
 from config import config
-from src.fs_operations import titlecase_names_in_current_dir
+from src.fs_operations import titlecase_directory_names
 
 FAKE_SHARED_FOLDER = config.folder
 FAKE_MUSIC_FOLDER = "/music"
@@ -34,6 +34,9 @@ def test_titlecase_names(empty_fs, fs):
     album_folder = os.path.join(artist_folder, album_name)
     fs.create_dir(album_folder)
 
+    assert fs.exists(album_folder), f"Expected album folder '{album_folder}' does not exist."
+    assert fs.exists(artist_folder), f"Expected album folder '{album_folder}' does not exist."
+
     music_folder = os.path.join(FAKE_SHARED_FOLDER, FAKE_MUSIC_FOLDER)
 
     # Mock the call to listPath
@@ -43,9 +46,9 @@ def test_titlecase_names(empty_fs, fs):
     ]
 
     # Act
-    titlecase_names_in_current_dir(conn, music_folder)
+    titlecase_directory_names(conn, music_folder)
 
-    # Assert
     artist_name_old = os.path.join(FAKE_SHARED_FOLDER, FAKE_MUSIC_FOLDER, artist_name)
     artist_name_new = os.path.join(FAKE_SHARED_FOLDER, FAKE_MUSIC_FOLDER, artist_name.title().replace("-", " "))
+    conn.rename.assert_called_once_with(FAKE_SHARED_FOLDER, artist_name_old, artist_name_new)
     conn.rename.assert_called_once_with(FAKE_SHARED_FOLDER, artist_name_old, artist_name_new)
