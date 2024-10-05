@@ -1,9 +1,7 @@
-from unittest.mock import patch, Mock
-
-import pytest
+from unittest.mock import Mock
 
 from config import config
-from src.connection import ConnectionAdapter
+from src.nas_fs.connection import ConnectionAdapter
 
 
 def test_init():

@@ -4,17 +4,13 @@
 #  - deleting
 
 import os
-import shutil
 
 from config import config
-from log import setup_logger
-
+import logging
 
 SHARED_FOLDER = config.folder
 VARIOUS_ARTISTS = "VA"
 
-
-logger = setup_logger()
 
 
 def move_dirs_on_nas(root):
@@ -75,6 +71,3 @@ def titlecase_directory_names(conn, current_dir: str):
         except Exception as e:
             with open("errors.txt", "w") as errors:
                 print(f"Error: directory {old_dir} cannot be renamed because the same name already exists", file=errors)
-
-
-

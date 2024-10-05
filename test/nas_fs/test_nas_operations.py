@@ -1,13 +1,11 @@
 import os
-from unittest.mock import Mock, MagicMock, create_autospec
+from unittest.mock import Mock
 
 import pytest
 import string
 
-from smb.base import SharedFile
-
 from config import config
-from src.fs_operations import titlecase_directory_names
+from src.nas_fs.nas_fs_operations import titlecase_directory_names
 
 FAKE_SHARED_FOLDER = config.folder
 FAKE_MUSIC_FOLDER = "/music"
