@@ -52,6 +52,6 @@ def delete_all_empty_folders(root_folder_path: str):
 
 
 if __name__ == "__main__":
-    ROOT_FOLDER = "/Users/lukas.kotatko/TESTING FILESYSTEM"
-    delete_all_empty_folders(ROOT_FOLDER)
+    MUSIC_ROOT_FOLDER = os.environ.get("MUSIC_ROOT_FOLDER")
+    delete_all_empty_folders(MUSIC_ROOT_FOLDER)
 
